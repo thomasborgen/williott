@@ -7,13 +7,13 @@
 
     {% for p in pokemon %}
 
+        {# add new row after 2 pokemon #}
         {% if loop.index == 3%}
             </div>
             <div class="stack horizontal spacing_medium">
         {% endif %}
-
         {% if p == target %}
-            <div class="target" hx-get="/which-one" hx-swap="innertHTML" hx-target="#game">
+            <div class="target" hx-swap="innerHTML swap:1s" hx-get="/which-one" hx-target="#game">
         {% else %}
         <div class="wrong">
         {% endif %}

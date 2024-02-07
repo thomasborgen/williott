@@ -13,3 +13,18 @@
 </div>
 </div>
 {% endblock content %}
+
+
+
+{% block script %}
+<script type="module">
+    document.body.addEventListener("htmx:configRequest", function(configEvent){
+        const wrongElements = document.body.getElementsByClassName("wrong")
+        const correctElement = document.body.getElementsByClassName("target")[0]
+        for (let i = 0; i < wrongElements.length; i++) {
+            wrongElements[i].classList.add("htmx-swapping")
+        }
+        correctElement.classList.add("htmx-swapping")
+    })
+    </script>
+{% endblock script %}

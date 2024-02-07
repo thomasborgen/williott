@@ -1,9 +1,15 @@
-.target.htmx-request {
+/* .target.htmx-request {
     background-color: green;
+    transition: background-color .5s linear;
+} */
+
+.target.htmx-swapping {
+    background-color: green;
+    transition: background-color .5s linear;
 }
-#game.htmx-swapping > .wrong {
+.wrong.htmx-swapping  {
     opacity: 0;
-    transition: opacity 1s ease-out;
+    transition: opacity .3s linear;
 }
 
 /* .choice {
