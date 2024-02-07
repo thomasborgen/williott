@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "williott"
+version = "0.1.0"
+description = ""
+authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.2"
+fastapi-htmx = "^0.4.1"
+uvicorn = "^0.27.0.post1"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

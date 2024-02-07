@@ -1,0 +1,90 @@
+
+@font-face {
+    font-family: "Pokemon";
+    src: url('/static/PocketMonk-15ze.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+html {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(160deg, #F88200 0%, #CE2405 100%);
+    /* background-color: green; */
+    font-family: "Pokemon", "PT Sans", Calibri, Tahoma, sans-serif;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.content {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.full_height {
+    height: 100%;
+}
+
+.stack {
+    display: flex;
+}
+
+.stack > * {
+    flex: 1;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+}
+
+.center_content {
+    justify-content: center;
+}
+
+.center_items { 
+    align-items: center;
+}
+
+.spacing_small {
+    gap: 10px;
+}
+
+.spacing_medium {
+    gap: 20px;
+}
+.spacing_large {
+    gap: 30px;
+}
+
+
+.fab {
+    width: 48px;
+    height: 48px;
+}
+
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.text_center {
+    text-align: center;
+}

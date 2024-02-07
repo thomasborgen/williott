@@ -1,0 +1,13 @@
+.target.htmx-request {
+    background-color: green;
+}
+#game.htmx-swapping > .wrong {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+/* .choice {
+    display: block;
+    flex-grow: 0;
+    flex-basis: 40%;
+} */

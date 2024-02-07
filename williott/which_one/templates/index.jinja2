@@ -1,0 +1,15 @@
+{% extends 'base.jinja2' %}
+{% block header %}
+<title>Whos that pokemon</title>
+{% endblock header %}
+
+{% block content %}
+<div class="content">
+<div class="stack vertical center_items">
+<h1>Which of these pokemon is</h1>
+<div id="game">
+    {% include 'game.jinja2' %}
+</div>
+</div>
+</div>
+{% endblock content %}

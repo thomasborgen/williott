@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lan="en">
+<head>
+    <title>Hello FastAPI-HTMX</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/williott.css">
+    <link rel="stylesheet" href="/which-one/static/which_one.css">
+    {% block header %} {% endblock %}
+</head>
+<body>
+    {% block content %} {% endblock content %}
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    {% block script %} {% endblock script %}
+</body>
+</html>

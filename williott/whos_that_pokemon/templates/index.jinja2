@@ -1,0 +1,16 @@
+{% extends 'base.jinja2' %}
+{% block header %}
+<title>Whos that pokemon</title>
+{% endblock header %}
+
+{% block content %}
+<h1>{{ greeting }}</h1>
+    <button
+        hx-get="/customers"
+        hx-swap="innerHTML"
+        hx-target="#customers_list"
+    >
+        Load Data
+    </button>
+    <div id="customers_list"></div>
+{% endblock content %}
