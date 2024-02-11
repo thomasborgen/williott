@@ -7,9 +7,8 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_htmx import htmx, TemplateSpec as Tpl
-import requests
 
-from williott.constants import POKEAPI_URL
+from williott.pokemon_db.db import database
 
 router = APIRouter(
     prefix="/which-one",
@@ -23,11 +22,9 @@ TEMPLATE = Jinja2Templates(directory=Path("williott/which_one/templates"))
 
 def construct_game():
     pokemon = [randint(1, 151), randint(1, 151), randint(1, 151), randint(1, 151)]
-    target = pokemon[randint(0, 3)]
+    target = database[str(pokemon[randint(0, 3)])]
 
-    result = requests.get(f"{POKEAPI_URL}{target}").json()
-
-    return {"pokemon": pokemon, "target": target, "target_name": result["name"]}
+    return {"pokemon": pokemon, "target": target}
 
 
 def construct_index():

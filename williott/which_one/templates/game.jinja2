@@ -1,18 +1,17 @@
 <div class="stack vertical center_items">
-    <h1 class="text_center">{{target_name | capitalize}}</h1>
+    <h1 class="text_center">{{target["name"]["english"] | capitalize}}</h1>
 </div>
 <div class="stack vertical spacing_medium">
 
     <div class="stack horizontal spacing_medium">
 
     {% for p in pokemon %}
-
         {# add new row after 2 pokemon #}
         {% if loop.index == 3%}
             </div>
             <div class="stack horizontal spacing_medium">
         {% endif %}
-        {% if p == target %}
+        {% if p == target["id"] %}
             <div class="target" hx-swap="innerHTML swap:1s" hx-get="/which-one" hx-target="#game">
         {% else %}
         <div class="wrong">

@@ -7,10 +7,17 @@
     background-color: green;
     transition: background-color .5s linear;
 }
+
+.wrong:target {
+    background-color: red;
+}
+
 .wrong.htmx-swapping  {
     opacity: 0;
     transition: opacity .3s linear;
 }
+
+
 
 /* .choice {
     display: block;
