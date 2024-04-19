@@ -6,6 +6,14 @@
     font-style: normal;
   }
 
+::before::after {
+    border: 0 solid #e5e7eb;
+    box-sizing: border-box;
+}
+
+blockquote, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, p, pre {
+    margin: 0;
+}
 
 html {
     height: 100vh;
@@ -13,12 +21,14 @@ html {
     background: linear-gradient(160deg, #F88200 0%, #CE2405 100%);
     /* background-color: green; */
     font-family: "Pokemon", "PT Sans", Calibri, Tahoma, sans-serif;
+    overflow: hidden;
 }
 
 body {
     height: 100%;
     width: 100%;
     margin: 0;
+    overflow: scroll;
 }
 
 .content {
@@ -32,11 +42,15 @@ body {
     height: 100%;
 }
 
+.full_width {
+    width: 100%;
+}
+
 .stack {
     display: flex;
 }
 
-.stack > * {
+.auto_size_flex_items > * {
     flex: 1;
 }
 
@@ -56,35 +70,56 @@ body {
     justify-content: center;
 }
 
+.space_between {
+    justify-content: space-between;
+}
+
+.space_evenly {
+    justify-content: space-evenly;
+}
+
 .center_items { 
     align-items: center;
+}
+
+.static_size {
+    flex-grow: 0;
 }
 
 .spacing_small {
     gap: 10px;
 }
-
 .spacing_medium {
     gap: 20px;
 }
 .spacing_large {
     gap: 30px;
 }
-
+.padding_small {
+    padding: 10px;
+}
+.padding_medium {
+    padding: 20px;
+}
+.padding_large {
+    padding: 30px;
+}
 
 .fab {
     width: 48px;
     height: 48px;
 }
 
-
-
 img {
     max-width: 100%;
     max-height: 100%;
 }
 
-
 .text_center {
     text-align: center;
+}
+
+.opaque_box {
+background: rgba(255,255,255,.2);
+    border-radius: 5px;
 }

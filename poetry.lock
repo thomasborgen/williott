@@ -386,6 +386,20 @@ files = [
 ]
 
 [[package]]
+name = "hypermedia"
+version = "2.0.0"
+description = "An opinionated way to work with html in pure python with htmx support."
+optional = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "hypermedia-2.0.0-py3-none-any.whl", hash = "sha256:0dfc542374fd1d74f30ae690b49a458542e8aaf39e34b9bdd5fd88cf420ad0b7"},
+    {file = "hypermedia-2.0.0.tar.gz", hash = "sha256:0526bdb42c1114aca777e679aa6af802317603ee31e6a9b7fa07e00863acb84d"},
+]
+
+[package.dependencies]
+typing-extensions = ">=4.11.0,<5.0.0"
+
+[[package]]
 name = "idna"
 version = "3.6"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -719,13 +733,13 @@ full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7
 
 [[package]]
 name = "typing-extensions"
-version = "4.9.0"
+version = "4.11.0"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "typing_extensions-4.9.0-py3-none-any.whl", hash = "sha256:af72aea155e91adfc61c3ae9e0e342dbc0cba726d6cba4b6c72c1f34e47291cd"},
-    {file = "typing_extensions-4.9.0.tar.gz", hash = "sha256:23478f88c37f27d76ac8aee6c905017a143b0b1b886c3c9f66bc2fd94f9f5783"},
+    {file = "typing_extensions-4.11.0-py3-none-any.whl", hash = "sha256:c1f94d72897edaf4ce775bb7558d5b79d8126906a14ea5ed1635921406c0387a"},
+    {file = "typing_extensions-4.11.0.tar.gz", hash = "sha256:83f085bd5ca59c80295fc2a82ab5dac679cbe02b9f33f7d83af68e241bea51b0"},
 ]
 
 [[package]]
@@ -766,4 +780,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "1e996eb74082e6acbda27788391827b7daccdf1d9272877a50e1ef4b975a62ce"
+content-hash = "80684418784aa484d1c8e3ac369f82747d511828d0e03e25e5574db87c178eb9"

@@ -1,0 +1,42 @@
+.fab {
+    width: 48px;
+    height: 48px;
+}
+
+img {
+    align-self: center;
+    max-width: 140%;
+    max-height: 140%;
+    margin-left: -10px;
+}
+
+.fab_circle {
+    /* position: absolute; */
+    /* background: #e7d8d5; */
+    background: rgba(231, 216, 213, 0.5);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-self: center;
+    text-align: center;
+}
+
+
+.circle {
+    background: rgba(231,216,213,.5);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.circle img {
+    align-self: center;
+    max-width: 140%;
+    max-height: 140%;
+    margin-bottom: -50px;
+}

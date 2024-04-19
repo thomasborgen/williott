@@ -1,0 +1,19 @@
+<div id="evolution_list" class="opaque_box padding_small stack full_width horizontal space_between">
+    {% if evolution["prev"] %}
+    {% with id = evolution["prev"][0] %}
+        {% include "partials/fab.jinja2" %}
+    {% endwith %}
+    {% else %}
+    <div class="fab static_size"></div>
+    {% endif %}
+
+    {% if evolution["next"] %}
+    <div class="stack vertical spacing_small static_size">
+    {% for next in evolution["next"] %}
+    {% with id = next[0] %}
+        {% include "partials/fab.jinja2" %}
+    {% endwith %}
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>

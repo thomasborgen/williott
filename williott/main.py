@@ -1,17 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-
-from fastapi import APIRouter
-
 from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi_htmx import htmx, htmx_init, TemplateSpec as Tpl
 
 from williott.whos_that_pokemon.router import (
@@ -24,6 +18,10 @@ from williott.which_one.router import (
     router as which_one_router,
     TEMPLATE as which_one_template,
     TEMPLATE_NAME as which_one_template_name,
+)
+
+from williott.pokedex.router import (
+    router as pokedex_router,
 )
 
 from williott.speak.router import (
@@ -41,6 +39,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(pokedex_router)
 app.include_router(whos_that_pokemon_router)
 app.include_router(which_one_router)
 app.include_router(speak_router)
@@ -50,6 +49,11 @@ app.mount(
     "/which-one/static",
     StaticFiles(directory="williott/which_one/static/"),
     name="which-one-static",
+)
+app.mount(
+    "/pokedex/static",
+    StaticFiles(directory="williott/pokedex/static/"),
+    name="pokedex",
 )
 
 
