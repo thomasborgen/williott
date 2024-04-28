@@ -21,7 +21,7 @@ audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncodin
 
 
 @router.get("/english/{text}")
-async def read_item(text: str):
+async def read_english(text: str):
     synthesis_input = texttospeech.SynthesisInput(text=text)
 
     speech = client.synthesize_speech(
@@ -31,7 +31,7 @@ async def read_item(text: str):
 
 
 @router.get("/japanese/{text}")
-async def read_item(text: str):
+async def read_japanese(text: str):
     synthesis_input = texttospeech.SynthesisInput(text=text)
 
     speech = client.synthesize_speech(

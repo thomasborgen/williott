@@ -33,7 +33,6 @@ def base() -> Element:
                 integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC",
                 crossorigin="anonymous",
             ),
-            Script(src="/static/hx-json-form.js"),
             lan="en",
         ),
     )

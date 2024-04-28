@@ -7,7 +7,9 @@ from williott.pokedex.views.base import base
 from williott.pokedex.views.common import render_pokemon_fab
 
 
-def render_index_partial():
+def render_generations_partial(
+    pokemon_ids: list[int] = Depends(get_pokemon_ids_by_generation),
+):
     generations = [
         Button(
             text=str(gen),
@@ -18,6 +20,9 @@ def render_index_partial():
         )
         for gen in range(1, 10)
     ]
+
+    pokemon = [render_pokemon_fab(id) for id in pokemon_ids]
+
     return ElementList(
         Div(
             Div(
@@ -27,16 +32,20 @@ def render_index_partial():
             Div(
                 *generations,
                 classes=[
-                    "stack auto_size_flex_items wrap spacing_medium horizontal center_items"
+                    "stack auto_size_flex_items spacing_small horizontal center_items"
                 ],
+            ),
+            Div(
+                *pokemon,
+                id="pokemon_list",
+                classes=["stack horizontal wrap spacing_small space_between"],
             ),
             classes=["content stack vertical spacing_medium"],
         ),
     )
 
 
-def render_index(
-    partial: Element = Depends(render_index_partial),
+def render_generations(
+    partial: Element = Depends(render_generations_partial),
 ):
-    print("render full index")
     return base().extend("content", partial)

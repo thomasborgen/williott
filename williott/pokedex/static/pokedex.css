@@ -36,7 +36,21 @@ img {
 
 .circle img {
     align-self: center;
-    max-width: 140%;
-    max-height: 140%;
+    max-width: 130%;
+    max-height: 130%;
     margin-bottom: -50px;
+}
+
+.pill {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    width: 50px;
+    align-self: center;
+}
+
+.data_area {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 15px;
 }
