@@ -1,5 +1,7 @@
 from hypermedia import (
+    Anchor,
     Body,
+    Button,
     Div,
     Doctype,
     Head,
@@ -10,6 +12,8 @@ from hypermedia import (
     Title,
 )
 from hypermedia.models import Element, ElementList
+
+from williott.svgs import svg_back, svg_home
 
 
 def base() -> Element:
@@ -26,6 +30,7 @@ def base() -> Element:
                 slot="head",
             ),
             Body(
+                header(),
                 Div(id="content", slot="content", classes=["content"]),
             ),
             Script(
@@ -33,6 +38,21 @@ def base() -> Element:
                 integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC",
                 crossorigin="anonymous",
             ),
+            Script(src="/static/auto_playback.js"),
             lan="en",
         ),
+    )
+
+
+def header() -> Element:
+    """Create the header page with navigation."""
+
+    return Div(
+        Button(
+            svg_back(),
+            onclick="history.back()",
+            classes=["fab"],
+        ),
+        Anchor(Button(svg_home(), classes=["fab"]), href="/"),
+        classes=["stack space_between padding_small"],
     )

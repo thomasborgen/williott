@@ -40,7 +40,7 @@ def render_generations_partial(
                 id="pokemon_list",
                 classes=["stack horizontal wrap spacing_small space_between"],
             ),
-            classes=["content stack vertical spacing_medium"],
+            classes=["stack vertical spacing_medium"],
         ),
     )
 

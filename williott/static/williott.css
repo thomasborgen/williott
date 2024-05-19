@@ -22,6 +22,7 @@ html {
     /* background-color: green; */
     font-family: "Pokemon", "PT Sans", Calibri, Tahoma, sans-serif;
     overflow: hidden;
+    color: #f2f2f2;
 }
 
 body {
@@ -123,3 +124,18 @@ img {
 background: rgba(255,255,255,.2);
     border-radius: 5px;
 }
+
+
+/* Style buttons */
+button {
+    background-color: unset; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  
+  /* Darker background on mouse-over */
+  button:hover {
+    color: whitesmoke;
+  }

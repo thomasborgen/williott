@@ -30,7 +30,7 @@ def render_index_partial():
                     "stack auto_size_flex_items wrap spacing_medium horizontal center_items"
                 ],
             ),
-            classes=["content stack vertical spacing_medium"],
+            classes=["stack vertical spacing_medium"],
         ),
     )
 

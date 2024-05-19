@@ -12,7 +12,7 @@ router = APIRouter(
 # Instantiates a client
 client = texttospeech.TextToSpeechClient()
 english_voice = texttospeech.VoiceSelectionParams(
-    language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+    language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.MALE
 )
 japanese_voice = texttospeech.VoiceSelectionParams(
     language_code="ja-JP", ssml_gender=texttospeech.SsmlVoiceGender.MALE
