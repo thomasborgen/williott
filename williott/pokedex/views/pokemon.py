@@ -33,7 +33,7 @@ def render_pokemon_partial(
             Header3(id="name_japanese", text=pokemon["name"]["japanese"]),
             classes=["stack vertical center_items"],
         ),
-        Button(classes=["pill"], text=f"#{pokemon['id']}"),
+        Button(id="number", classes=["pill"], text=f"#{pokemon['id']}"),
         Div(
             # [render_pokemon_fab(pokemon["evolution"]),
             Div(
@@ -62,6 +62,11 @@ def render_pokemon_partial(
             src=urllib.parse.quote(
                 f"/speak/japanese/このポケモンの名前は, {pokemon['name']['japanese']}"
             ),
+            style="display:none;",
+        ),
+        Audio(
+            id="audio_number",
+            src=urllib.parse.quote(f"/speak/english/Number, {pokemon['id']}"),
             style="display:none;",
         ),
         Audio(
