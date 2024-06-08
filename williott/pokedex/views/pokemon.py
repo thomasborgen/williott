@@ -14,9 +14,6 @@ def render_pokemon_partial(
     pokemon: dict[str, Any] = Depends(pokemon),
     evolutions: list[str] = Depends(evolutions),
 ):
-    print("pokemon data", pokemon)
-    print("evolutions", evolutions)
-
     rendered_evolutions = [render_pokemon_fab(id) for id in evolutions]
 
     return Div(
@@ -42,7 +39,7 @@ def render_pokemon_partial(
             Div(
                 *rendered_evolutions,
                 id="pokemon_list",
-                classes=["stack horizontal wrap spacing_small space_between"],
+                classes=["stack horizontal wrap spacing_small space_evenly"],
             ),
             id="evolution_tree",
             classes=["data_area"],

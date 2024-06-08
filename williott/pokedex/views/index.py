@@ -1,10 +1,8 @@
 from fastapi import Depends
 from hypermedia import Button, Div, Header2
-from hypermedia.models import ElementList, Element
+from hypermedia.models import Element
 
-from williott.pokedex.dependencies import get_pokemon_ids_by_generation
 from williott.pokedex.views.base import base
-from williott.pokedex.views.common import render_pokemon_fab
 
 
 def render_index_partial():
@@ -18,20 +16,18 @@ def render_index_partial():
         )
         for gen in range(1, 10)
     ]
-    return ElementList(
+    return Div(
         Div(
-            Div(
-                Header2(classes=["text_center"], text="PokeDex"),
-                classes=["stack vertical center_items"],
-            ),
-            Div(
-                *generations,
-                classes=[
-                    "stack auto_size_flex_items wrap spacing_medium horizontal center_items"
-                ],
-            ),
-            classes=["stack vertical spacing_medium"],
+            Header2(classes=["text_center"], text="PokeDex"),
+            classes=["stack vertical center_items"],
         ),
+        Div(
+            *generations,
+            classes=[
+                "stack auto_size_flex_items wrap spacing_medium horizontal center_items"
+            ],
+        ),
+        classes=["stack vertical spacing_medium"],
     )
 
 

@@ -1,24 +1,10 @@
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from hypermedia import full, htmx
+from hypermedia.models import Element
 
-from pathlib import Path
-
-from fastapi_htmx import htmx, htmx_init, TemplateSpec as Tpl
-
-from williott.whos_that_pokemon.router import (
-    router as whos_that_pokemon_router,
-    TEMPLATE as whos_that_pokemon_template,
-    TEMPLATE_NAME as whos_that_pokemon_template_name,
-)
-
-from williott.which_one.router import (
-    router as which_one_router,
-    TEMPLATE as which_one_template,
-    TEMPLATE_NAME as which_one_template_name,
-)
 
 from williott.pokedex.router import (
     router as pokedex_router,
@@ -27,6 +13,7 @@ from williott.pokedex.router import (
 from williott.speak.router import (
     router as speak_router,
 )
+from williott.views.index import render_index, render_index_partial
 
 app = FastAPI()
 
@@ -40,8 +27,6 @@ app.add_middleware(
 )
 
 app.include_router(pokedex_router)
-app.include_router(whos_that_pokemon_router)
-app.include_router(which_one_router)
 app.include_router(speak_router)
 
 app.mount("/static", StaticFiles(directory="williott/static/"), name="static")
@@ -57,17 +42,12 @@ app.mount(
 )
 
 
-templates = {
-    "main": Jinja2Templates(directory=Path("williott/templates")),
-    whos_that_pokemon_template_name: whos_that_pokemon_template,
-    which_one_template_name: which_one_template,
-}
-
-htmx_init(templates=templates)
-
-
 @app.get("/", response_class=HTMLResponse)
-@htmx(Tpl("main", "index"), Tpl("main", "index"))
-async def root_page(request: Request):
-    print("what")
-    return {"greeting": "Hello World"}
+@htmx
+async def index(
+    request: Request,
+    partial: Element = Depends(render_index_partial),
+    full: Element = Depends(full(render_index)),
+) -> None:
+    """Return the index page."""
+    pass

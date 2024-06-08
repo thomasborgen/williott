@@ -16,32 +16,29 @@ def render_generations_partial(
             hx_get=f"/pokedex/generations/{gen}",
             hx_target="#content",
             hx_swap="innerHTML",
-            hx_push_url="true",
         )
         for gen in range(1, 10)
     ]
 
     pokemon = [render_pokemon_fab(id) for id in pokemon_ids]
 
-    return ElementList(
+    return Div(
         Div(
-            Div(
-                Header2(classes=["text_center"], text="PokeDex"),
-                classes=["stack vertical center_items"],
-            ),
-            Div(
-                *generations,
-                classes=[
-                    "stack auto_size_flex_items spacing_small horizontal center_items"
-                ],
-            ),
-            Div(
-                *pokemon,
-                id="pokemon_list",
-                classes=["stack horizontal wrap spacing_small space_between"],
-            ),
-            classes=["stack vertical spacing_medium"],
+            Header2(classes=["text_center"], text="PokeDex"),
+            classes=["stack vertical center_items"],
         ),
+        Div(
+            *generations,
+            classes=[
+                "stack auto_size_flex_items spacing_small horizontal center_items"
+            ],
+        ),
+        Div(
+            *pokemon,
+            id="pokemon_list",
+            classes=["stack horizontal wrap spacing_small space_between"],
+        ),
+        classes=["stack vertical spacing_medium"],
     )
 
 

@@ -26,7 +26,6 @@ def base() -> Element:
                 Meta(charset="UTF-8"),
                 Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
                 Link(rel="stylesheet", href="/static/williott.css"),
-                Link(rel="stylesheet", href="/pokedex/static/pokedex.css"),
                 Link(
                     rel="stylesheet",
                     href="https://fonts.googleapis.com/icon?family=Material+Icons",
@@ -34,7 +33,6 @@ def base() -> Element:
                 slot="head",
             ),
             Body(
-                header(),
                 Div(id="content", slot="content", classes=["content"]),
             ),
             Script(
@@ -45,18 +43,4 @@ def base() -> Element:
             Script(src="/static/auto_playback.js"),
             lan="en",
         ),
-    )
-
-
-def header() -> Element:
-    """Create the header page with navigation."""
-
-    return Div(
-        Button(
-            icon(name="arrow_back_ios", size="48px"),
-            onclick="history.back()",
-            classes=["fab"],
-        ),
-        Anchor(Button(icon(name="menu", size="48px"), classes=["fab"]), href="/"),
-        classes=["stack space_between padding_small"],
     )
