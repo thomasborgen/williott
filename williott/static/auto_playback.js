@@ -9,7 +9,7 @@ id:
 This code will then attach an on click event to the button
 that will play the audio whenever it is clicked.
 */
-
+function auto_assign_audio_playback_to_buttons(){
 const audio_elements = document.getElementsByTagName("audio");
 
 for (const audio_element of audio_elements) {
@@ -21,3 +21,10 @@ for (const audio_element of audio_elements) {
     });
   }
 }
+}
+
+auto_assign_audio_playback_to_buttons()
+
+document.addEventListener('htmx:afterRequest', function(evt) {
+  auto_assign_audio_playback_to_buttons()
+});

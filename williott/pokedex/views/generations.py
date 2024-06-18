@@ -1,6 +1,6 @@
 from fastapi import Depends
 from hypermedia import Button, Div, Header2
-from hypermedia.models import ElementList, Element
+from hypermedia.models import Element
 
 from williott.pokedex.dependencies import get_pokemon_ids_by_generation
 from williott.pokedex.views.base import base

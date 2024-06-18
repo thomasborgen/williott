@@ -3,7 +3,7 @@
     height: 48px;
 }
 
-img {
+.fab img {
     align-self: center;
     max-width: 140%;
     max-height: 140%;
@@ -54,3 +54,21 @@ img {
     margin: 15px;
     padding: 15px;
 }
+
+
+.cards .list img {
+    width: 100%;
+}
+
+.cards button {
+    all: unset;
+    max-width: 40%;
+}
+
+.cards .popover img {
+    width: 90vw;
+}
+
+/* .cards:nth-child(2n) {
+    flex-basis: 100%;
+} */

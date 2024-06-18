@@ -17,7 +17,7 @@ def pokemon(pokemon_id: int = Path(...)) -> dict[str, Any]:
     return database["pokemon"].get(str(pokemon_id))
 
 
-def evolutions(pokemon: dict[str, Any] = Depends(pokemon)) -> dict[str, Any]:
+def evolutions(pokemon: dict[str, Any] = Depends(pokemon)) -> list[int]:
     hierarchy = []
 
     if child := pokemon["evolution"].get("prev"):
@@ -28,19 +28,17 @@ def evolutions(pokemon: dict[str, Any] = Depends(pokemon)) -> dict[str, Any]:
     hierarchy.append(pokemon["id"])
 
     if parents := pokemon["evolution"].get("next"):
-        print(parents)
-
-        hierarchy.extend(resolve_parents(parents))
+        hierarchy.extend(_resolve_parents(parents))
 
     return hierarchy
 
 
-def resolve_parents(parents):
+def _resolve_parents(parents):
     hierarchy = []
 
     for parent in parents:
         hierarchy.append(parent[0])
         if grandparents := database["pokemon"][parent[0]]["evolution"].get("next"):
-            hierarchy.extend(resolve_parents(grandparents))
+            hierarchy.extend(_resolve_parents(grandparents))
 
     return hierarchy

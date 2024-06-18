@@ -1,20 +1,22 @@
 from fastapi import Depends
 from typing import Any
-from hypermedia import Audio, Button, Div, Header1, Header2, Header3, Image, Script
+from hypermedia import Audio, Button, Div, Header1, Header3, Image
 from hypermedia.models import Element
 
 import urllib
 
 from williott.pokedex.dependencies import pokemon, evolutions
 from williott.pokedex.views.base import base
-from williott.pokedex.views.common import render_pokemon_fab
+from williott.pokedex.views.common import render_pokemon_fab_htmx
 
 
 def render_pokemon_partial(
     pokemon: dict[str, Any] = Depends(pokemon),
     evolutions: list[str] = Depends(evolutions),
 ):
-    rendered_evolutions = [render_pokemon_fab(id) for id in evolutions]
+    rendered_evolutions = [
+        render_pokemon_fab_htmx(int(id), "#content") for id in evolutions
+    ]
 
     return Div(
         Div(
@@ -35,7 +37,6 @@ def render_pokemon_partial(
         ),
         Button(id="number", classes=["pill"], text=f"#{pokemon['id']}"),
         Div(
-            # [render_pokemon_fab(pokemon["evolution"]),
             Div(
                 *rendered_evolutions,
                 id="pokemon_list",
@@ -47,6 +48,18 @@ def render_pokemon_partial(
         Div(
             id="description_english",
             text=pokemon["description"],
+            classes=["data_area"],
+        ),
+        Div(
+            Div(
+                Image(src="/static/loading_pikachu.gif", width="30px"),
+                id="spinner",
+                classes=["stack horizontal center_items center_content htmx-indicator"],
+            ),
+            id="cards",
+            hx_get=f"/pokedex/cards/{pokemon['id']}",
+            hx_trigger="load",
+            hx_indicator="#spinner",
             classes=["data_area"],
         ),
         Audio(
