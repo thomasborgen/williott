@@ -387,13 +387,13 @@ files = [
 
 [[package]]
 name = "hypermedia"
-version = "2.0.0"
+version = "2.1.1"
 description = "An opinionated way to work with html in pure python with htmx support."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "hypermedia-2.0.0-py3-none-any.whl", hash = "sha256:0dfc542374fd1d74f30ae690b49a458542e8aaf39e34b9bdd5fd88cf420ad0b7"},
-    {file = "hypermedia-2.0.0.tar.gz", hash = "sha256:0526bdb42c1114aca777e679aa6af802317603ee31e6a9b7fa07e00863acb84d"},
+    {file = "hypermedia-2.1.1-py3-none-any.whl", hash = "sha256:26c6bf976a36df5c90ff908d55c5435d5481d1d47e46211e738286361685d1b4"},
+    {file = "hypermedia-2.1.1.tar.gz", hash = "sha256:0f7db5db69aaea0e113fc0dcb67f5218aaed104d08832bd7cc7735c5f346e0f3"},
 ]
 
 [package.dependencies]
@@ -851,4 +851,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d21b6627c4320a270372df680558c4ea3481c6972db0332ded45285782702906"
+content-hash = "dfd8d7ce46afb8e4759e9ba6f83ba3cdd4372a74582f3577c9539324fcccb9c6"
