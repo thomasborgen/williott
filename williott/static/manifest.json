@@ -1,0 +1,15 @@
+{
+    "name": "Williott",
+    "short_name": "Williott",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Pokedex with text to speech and more!",
+    "icons": [
+      {
+        "src": "/static/favicon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
