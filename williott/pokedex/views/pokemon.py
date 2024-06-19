@@ -8,12 +8,16 @@ import urllib
 from williott.pokedex.dependencies import pokemon, evolutions
 from williott.pokedex.views.base import base
 from williott.pokedex.views.common import render_pokemon_fab_htmx
+from williott.pokemon.dependencies import get_species
+from williott.pokemon.models import Species
 
 
 def render_pokemon_partial(
     pokemon: dict[str, Any] = Depends(pokemon),
     evolutions: list[str] = Depends(evolutions),
+    species: Species = Depends(get_species),
 ):
+    print(species)
     rendered_evolutions = [
         render_pokemon_fab_htmx(int(id), "#content") for id in evolutions
     ]
