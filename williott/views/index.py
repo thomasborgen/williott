@@ -28,5 +28,4 @@ def render_index_partial():
 def render_index(
     partial: Element = Depends(render_index_partial),
 ):
-    print("render full index")
     return base().extend("content", partial)

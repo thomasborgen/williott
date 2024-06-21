@@ -1,16 +1,4 @@
-from hypermedia import (
-    Anchor,
-    Body,
-    Button,
-    Div,
-    Doctype,
-    Head,
-    Html,
-    Link,
-    Meta,
-    Script,
-    Title,
-)
+from hypermedia import Anchor, Button, Div, Link
 from hypermedia.models import Element, ElementList
 
 from williott.html_utils import icon

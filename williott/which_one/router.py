@@ -8,7 +8,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_htmx import htmx, TemplateSpec as Tpl
 
-from williott.pokemon_db.db import database
+from williott.pokemon.constants import database
 
 router = APIRouter(
     prefix="/which-one",
