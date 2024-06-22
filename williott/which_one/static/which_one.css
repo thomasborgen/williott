@@ -3,20 +3,29 @@
     transition: background-color .5s linear;
 } */
 
-.target.htmx-swapping {
+.htmx-swapping * {.target {
     background-color: green;
     transition: background-color .5s linear;
+    
+    }
+    .wrong {
+        opacity: 0;
+        transition: opacity .3s linear;
+    }
 }
 
-.wrong:target {
+.wrong:hover {
     background-color: red;
 }
 
-.wrong.htmx-swapping  {
-    opacity: 0;
-    transition: opacity .3s linear;
+#game {
+    width: 100%;
+    height: 100%;
 }
-
+#game * img {
+    width: 100%;
+    height: 100%;
+}
 
 
 /* .choice {

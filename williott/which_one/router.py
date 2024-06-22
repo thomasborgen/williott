@@ -1,14 +1,12 @@
-from random import randint
-from fastapi import APIRouter
-
-from pathlib import Path
+from fastapi import APIRouter, Depends
 
 from fastapi import Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi_htmx import htmx, TemplateSpec as Tpl
+from hypermedia import full, htmx
+from hypermedia.models import Element
 
-from williott.pokemon.constants import database
+from williott.which_one.views.game import render_game, render_game_partial
+from williott.which_one.views.index import render_index, render_index_partial
 
 router = APIRouter(
     prefix="/which-one",
@@ -16,30 +14,24 @@ router = APIRouter(
     dependencies=[],
 )
 
-TEMPLATE_NAME = "which_one"
-TEMPLATE = Jinja2Templates(directory=Path("williott/which_one/templates"))
-
-
-def construct_game():
-    pokemon = [randint(1, 151), randint(1, 151), randint(1, 151), randint(1, 151)]
-    target = database[str(pokemon[randint(0, 3)])]
-
-    return {"pokemon": pokemon, "target": target}
-
-
-def construct_index():
-    return {
-        "name": "Pikachu",
-        **construct_game(),
-    }
-
 
 @router.get("/", response_class=HTMLResponse)
-@htmx(
-    Tpl(TEMPLATE_NAME, "game"),
-    Tpl(TEMPLATE_NAME, "index"),
-    construct_game,
-    construct_index,
-)
-async def root_page(request: Request):
+@htmx
+async def index(
+    request: Request,
+    partial: Element = Depends(render_index_partial),
+    full: Element = Depends(full(render_index)),
+) -> None:
+    """Return the index page."""
+    pass
+
+
+@router.get("/{generation_id}", response_class=HTMLResponse)
+@htmx
+async def generation(
+    request: Request,
+    partial: Element = Depends(render_game_partial),
+    full: Element = Depends(full(render_game)),
+) -> None:
+    """Return the game page."""
     pass
