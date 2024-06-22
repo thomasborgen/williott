@@ -10,6 +10,10 @@ from williott.pokedex.router import (
     router as pokedex_router,
 )
 
+from williott.which_one.router import (
+    router as which_one_router,
+)
+
 from williott.speak.router import (
     router as speak_router,
 )
@@ -27,6 +31,7 @@ app.add_middleware(
 )
 
 app.include_router(pokedex_router)
+app.include_router(which_one_router)
 app.include_router(speak_router)
 
 app.mount("/static", StaticFiles(directory="williott/static/"), name="static")

@@ -1,3 +1,5 @@
+OFFICIAL_ART_PATH = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png"
+
 TYPE_COLOR_MAP = {
     "normal": {
         "base": "#A8A878",

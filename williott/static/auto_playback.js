@@ -15,7 +15,10 @@ const audio_elements = document.getElementsByTagName("audio");
 for (const audio_element of audio_elements) {
   const target_id = audio_element.id.replace("audio_", "");
   const target = document.getElementById(target_id);
+
   if (target !== null) {
+
+    console.log("added for some reason")
     target.addEventListener("click", () => {
       audio_element.play();
     });
@@ -25,6 +28,6 @@ for (const audio_element of audio_elements) {
 
 auto_assign_audio_playback_to_buttons()
 
-document.addEventListener('htmx:afterRequest', function(evt) {
+document.addEventListener('htmx:afterSettle', function(evt) {
   auto_assign_audio_playback_to_buttons()
 });
