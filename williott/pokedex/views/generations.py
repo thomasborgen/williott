@@ -2,13 +2,14 @@ from fastapi import Depends
 from hypermedia import Button, Div, Header2
 from hypermedia.models import Element
 
-from williott.pokedex.dependencies import get_pokemon_ids_by_generation
 from williott.pokedex.views.base import base
 from williott.pokedex.views.common import render_pokemon_fab
+from williott.pokemon.dependencies import get_generation
+from williott.pokemon.models import GenerationRead
 
 
 def render_generations_partial(
-    pokemon_ids: list[int] = Depends(get_pokemon_ids_by_generation),
+    generation: GenerationRead = Depends(get_generation),
 ):
     generations = [
         Button(
@@ -20,7 +21,9 @@ def render_generations_partial(
         for gen in range(1, 10)
     ]
 
-    pokemon = [render_pokemon_fab(id) for id in pokemon_ids]
+    pokemon = [render_pokemon_fab(species.id) for species in generation.species]
+
+    # pokemon = [render_pokemon_fab(id) for id in range(1, 151)]
 
     return Div(
         Div(

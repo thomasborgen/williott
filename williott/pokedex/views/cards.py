@@ -1,21 +1,18 @@
-from typing import Any
-
 import requests
 from fastapi import Depends
 from hypermedia import Button, Div, Image
 from hypermedia.models import ElementList
 
-from williott.pokedex.dependencies import pokemon
+from williott.pokemon.dependencies import get_species
+from williott.pokemon.models import Species
 
 CARD_API: str = "https://api.pokemontcg.io/v2/cards?q=nationalPokedexNumbers:"
 
 
 def render_cards_partial(
-    pokemon: dict[str, Any] = Depends(pokemon),
+    species: Species = Depends(get_species),
 ):
-    result = requests.get(CARD_API + str(pokemon["id"]))
-
-    print(result)
+    result = requests.get(CARD_API + str(species.id))
 
     images = [
         {"id": entry["id"], "url": entry["images"]["small"]}
