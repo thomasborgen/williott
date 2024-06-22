@@ -1,4 +1,3 @@
-from random import randint
 from fastapi import APIRouter, Depends
 
 from fastapi import Request
@@ -14,20 +13,6 @@ router = APIRouter(
     tags=["Which one"],
     dependencies=[],
 )
-
-
-def construct_game():
-    pokemon = [randint(1, 151), randint(1, 151), randint(1, 151), randint(1, 151)]
-    target = database[str(pokemon[randint(0, 3)])]
-
-    return {"pokemon": pokemon, "target": target}
-
-
-def construct_index():
-    return {
-        "name": "Pikachu",
-        **construct_game(),
-    }
 
 
 @router.get("/", response_class=HTMLResponse)
