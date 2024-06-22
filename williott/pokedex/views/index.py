@@ -13,6 +13,7 @@ def render_index_partial():
             hx_target="#content",
             hx_swap="innerHTML",
             hx_push_url="true",
+            preload=True,
         )
         for gen in range(1, 10)
     ]

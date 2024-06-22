@@ -24,10 +24,12 @@ def render_game_partial(
                 src=OFFICIAL_ART_PATH.format(id=option.id),
                 classes=["target"],
             ),
+            preload=True,
             hx_get=f"/which-one/{generation.id}",
             hx_swap="innerHTML swap:1s",
             hx_target="#content",
             classes=["target"],
+            **{"preload-images": "true"},
         )
         if option.id == target.id
         else Div(

@@ -11,6 +11,7 @@ def render_index_partial():
             text=str(gen),
             classes=["fab"],
             href=f"/which-one/{gen}",
+            preload=True,
         )
         for gen in range(1, 10)
     ]

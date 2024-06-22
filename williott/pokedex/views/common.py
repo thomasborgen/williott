@@ -12,6 +12,7 @@ def render_pokemon_fab(id: int):
         ),
         href=f"/pokedex/pokemon/{id}",
         classes=["fab static_size"],
+        preload=True,
     )
 
 
@@ -27,4 +28,5 @@ def render_pokemon_fab_htmx(id: int, target: str):
         hx_get=f"/pokedex/pokemon/{id}",
         hx_target=target,
         classes=["fab static_size"],
+        preload=True,
     )
