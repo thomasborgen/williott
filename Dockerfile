@@ -9,8 +9,8 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="${PATH}:/root/.local/bin"
 
 # For local dev:
-ENV GOOGLE_APPLICATION_CREDENTIALS='key.json'
-COPY ./key.json /app/
+# ENV GOOGLE_APPLICATION_CREDENTIALS='key.json'
+# COPY ./key.json /app/
 
 # setup poetry to use virtualenv
 RUN poetry config virtualenvs.create true
