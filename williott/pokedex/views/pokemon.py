@@ -8,14 +8,14 @@ import urllib
 from williott.pokedex.views.base import base
 from williott.pokedex.views.common import render_pokemon_fab_htmx
 from williott.pokemon.dependencies import get_evolutions, get_species
-from williott.pokemon.models import Species
+from williott.pokemon.models import Species, SpeciesRead
 
 
 image_base_path = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png"
 
 
 def render_pokemon_partial(
-    evolutions: list[Species] = Depends(get_evolutions),
+    evolutions: list[SpeciesRead] = Depends(get_evolutions),
     species: Species = Depends(get_species),
 ):
     english_name = species.names[8]
