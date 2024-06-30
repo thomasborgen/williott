@@ -23,8 +23,6 @@ def render_generations_partial(
 
     pokemon = [render_pokemon_fab(species.id) for species in generation.species]
 
-    # pokemon = [render_pokemon_fab(id) for id in range(1, 151)]
-
     return Div(
         Div(
             Header2(classes=["text_center"], text="PokeDex"),
