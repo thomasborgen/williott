@@ -1,7 +1,7 @@
 {
     "name": "Williott",
     "short_name": "Williott",
-    "start_url": "https://williott-uj3ectjhpa-lz.a.run.app/",
+    "start_url": "https://williott.kaiba.tech/",
     "display": "standalone",
     "background_color": "#fff",
     "description": "Pokedex with text to speech and more!",
