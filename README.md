@@ -9,7 +9,7 @@ Pokemon tools and learning games for my kids. Most interesting feature is that y
 |   |   |
 |---|---|
 | Framework  | [__FastAPI__](https://fastapi.tiangolo.com/) |
-| html |[__hypermedida__](https://github.com/thomasborgen/hypermedia) |
+| html |[__hypermedia__](https://github.com/thomasborgen/hypermedia) |j
 | JS library | [__</> htmx__](https://htmx.org/) |
 | JS | Raw dogg |
 
