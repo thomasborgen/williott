@@ -44,7 +44,7 @@ def render_game_partial(
 
     return Div(
         Div(
-            Header2(classes=["text_center"], text=target.identifier),
+            Header2(target.identifier, classes=["text_center"]),
             classes=["stack vertical center_items"],
         ),
         Div(

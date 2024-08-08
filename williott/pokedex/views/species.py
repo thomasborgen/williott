@@ -51,11 +51,11 @@ def render_species_partial(
             classes=["stack spacing_small vertical center_items"],
         ),
         Div(
-            Header1(id="name_english", text=english_name.name),
-            Header3(id="name_japanese", text=japanese_name.name),
+            Header1(english_name.name, id="name_english"),
+            Header3(japanese_name.name, id="name_japanese"),
             classes=["stack vertical center_items"],
         ),
-        Button(id="number", classes=["pill"], text=f"#{species.id}"),
+        Button(f"#{species.id}", id="number", classes=["pill"]),
         Div(
             Div(
                 *rendered_evolutions,
@@ -65,11 +65,7 @@ def render_species_partial(
             id="evolution_tree",
             classes=["data_area"],
         ),
-        Div(
-            id="description_english",
-            text=description,
-            classes=["data_area"],
-        ),
+        Div(description, id="description_english", classes=["data_area"]),
         Div(
             Div(
                 Image(src="/static/loading_pikachu.gif", width="30px"),

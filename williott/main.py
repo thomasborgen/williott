@@ -2,7 +2,7 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from hypermedia import full, htmx
+from hypermedia.fastapi import full, htmx
 from hypermedia.models import Element
 
 

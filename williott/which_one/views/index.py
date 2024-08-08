@@ -8,7 +8,7 @@ from williott.which_one.views.base import base, header
 def render_index_partial():
     generations = [
         Anchor(
-            text=str(gen),
+            str(gen),
             classes=["fab"],
             href=f"/which-one/{gen}",
             preload=True,
@@ -17,7 +17,7 @@ def render_index_partial():
     ]
     return Div(
         Div(
-            Header2(classes=["text_center"], text="Choose Generation"),
+            Header2("Choose Generation", classes=["text_center"]),
             classes=["stack vertical center_items"],
         ),
         Div(

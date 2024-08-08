@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from fastapi import Request
 from fastapi.responses import HTMLResponse
-from hypermedia import full, htmx
+from hypermedia.fastapi import full, htmx
 from hypermedia.models import Element
 
 from williott.which_one.views.game import render_game, render_game_partial

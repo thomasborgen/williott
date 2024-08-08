@@ -20,7 +20,7 @@ def real_base() -> Element:
         Doctype(),
         Html(
             Head(
-                Title(text="Williott - Pokedex"),
+                Title("Williott - Pokedex"),
                 Meta(charset="UTF-8"),
                 Meta(name="viewport", content="width=device-width, initial-scale=1.0"),
                 Meta(name="mobile-web-app-capable", content="yes"),

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
-from hypermedia import full, htmx
+from hypermedia.fastapi import full, htmx
 from hypermedia.models import Element
 from pydantic import BaseModel
 

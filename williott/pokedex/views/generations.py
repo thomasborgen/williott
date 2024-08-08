@@ -13,7 +13,7 @@ def render_generations_partial(
 ):
     generations = [
         Button(
-            text=str(gen),
+            str(gen),
             hx_get=f"/pokedex/generations/{gen}",
             hx_target="#content",
             hx_swap="innerHTML",
@@ -25,7 +25,7 @@ def render_generations_partial(
 
     return Div(
         Div(
-            Header2(classes=["text_center"], text="PokeDex"),
+            Header2("PokeDex", classes=["text_center"]),
             classes=["stack vertical center_items"],
         ),
         Div(

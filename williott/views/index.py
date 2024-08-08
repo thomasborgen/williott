@@ -8,7 +8,7 @@ from williott.views.base import base
 
 def render_index_partial():
     return Div(
-        Header1(classes=["text_center"], text="Williott"),
+        Header1("Williott", classes=["text_center"]),
         Div(
             Anchor(
                 Button(icon(name="search", size="48px"), classes=["fab"]),
@@ -20,7 +20,7 @@ def render_index_partial():
             ),
             classes=["stack horizontal"],
         ),
-        Paragraph(text="A collection pokemon related tools/games for my kids"),
+        Paragraph("A collection pokemon related tools/games for my kids"),
         classes=["stack vertical center_items space_evenly full_height"],
     )
 
