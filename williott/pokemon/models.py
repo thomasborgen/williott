@@ -127,11 +127,62 @@ class Pokemon(PokemonBase, table=True):
     """The Database Pokemon class."""
 
     species: "Species" = Relationship(back_populates="pokemon")
+    forms: list["Form"] = Relationship(back_populates="pokemon")
 
 
 class PokemonRead(PokemonBase):
     species: "SpeciesRead"
+    forms: list["FormRead"]
 
 
 class PokemonReadWithoutSpecies(PokemonBase):
     pass
+
+
+class FormBase(SQLModel):
+    """Base class Form class."""
+
+    identifier: str
+    form_identifier: str | None
+    pokemon_id: int = Field(foreign_key="pokemon.id")
+    introduced_in_version_group_id: int
+    is_default: bool
+    is_battle_only: bool
+    is_mega: bool
+    form_order: int
+    order: int
+
+
+class Form(FormBase, table=True):
+    """The Database Form class."""
+
+    id: int | None = Field(default=None, primary_key=True, nullable=False)
+    pokemon: "Pokemon" = Relationship(back_populates="forms")
+    names: list["FormName"] = Relationship(back_populates="form")
+
+
+class FormRead(FormBase):
+    id: int
+    pokemon: "PokemonRead"
+
+
+class FormNameBase(SQLModel):
+    """Base class Form class."""
+
+    pokemon_form_id: int = Field(foreign_key="form.id")
+    language_id: int
+    form_name: str | None
+    pokemon_name: str | None
+
+
+class FormName(FormNameBase, table=True):
+    """The Database Form class."""
+
+    id: int | None = Field(default=None, primary_key=True, nullable=False)
+
+    form: "Form" = Relationship(back_populates="names")
+
+
+class FormNameRead(FormNameBase):
+    id: int
+    form: "Form"

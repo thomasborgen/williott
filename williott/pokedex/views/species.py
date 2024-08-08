@@ -6,10 +6,7 @@ from hypermedia.models import Element
 import urllib
 
 from williott.pokedex.views.base import base
-from williott.pokedex.views.common import (
-    render_pokemon_fab_htmx,
-    render_species_fab_htmx,
-)
+from williott.pokedex.views.common import render_species_fab_htmx
 from williott.pokemon.dependencies import get_evolutions, get_pokemon, get_species
 from williott.pokemon.models import Pokemon, Species, SpeciesRead
 
@@ -17,10 +14,10 @@ from williott.pokemon.models import Pokemon, Species, SpeciesRead
 image_base_path = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png"
 
 
-def render_pokemon_partial(
-    evolutions: list[SpeciesRead] = Depends(get_evolutions),
+def render_species_partial(
     species: Species = Depends(get_species),
-    pokemon: Pokemon = Depends(get_pokemon),
+    # pokemon: Pokemon = Depends(get_pokemon),
+    evolutions: list[SpeciesRead] = Depends(get_evolutions),
 ):
     english_name = species.names[8]
     japanese_name = species.names[0]
@@ -37,16 +34,9 @@ def render_pokemon_partial(
         render_species_fab_htmx(species.id, "#content") for species in evolutions
     ]
 
-    names = pokemon.forms[0].names
+    pokemon_forms = species.pokemon
 
-    form_name_english = english_name.name
-
-    if len(names):
-        form_name = [name for name in names if name.language_id == 9][0]
-
-        form_name_english = (
-            form_name.pokemon_name or form_name.form_name or form_name_english
-        )
+    print([p.id for p in pokemon_forms])
 
     return Div(
         Div(
@@ -54,7 +44,7 @@ def render_pokemon_partial(
                 Image(
                     classes=["pokemon_image"],
                     alt=f"official-artwork of {english_name.name}",
-                    src=image_base_path.format(id=pokemon.id),
+                    src=image_base_path.format(id=pokemon_forms[-1].id),
                 ),
                 classes=["circle stack horizontal space_evenly"],
             ),
@@ -87,7 +77,7 @@ def render_pokemon_partial(
                 classes=["stack horizontal center_items center_content htmx-indicator"],
             ),
             id="cards",
-            hx_get=f"/pokedex/cards/{pokemon.id}",
+            hx_get=f"/pokedex/cards/{species.id}",
             hx_trigger="load",
             hx_indicator="#spinner",
             classes=["data_area"],
@@ -124,7 +114,7 @@ def render_pokemon_partial(
     )
 
 
-def render_pokemon(
-    partial: Element = Depends(render_pokemon_partial),
+def render_species(
+    partial: Element = Depends(render_species_partial),
 ):
     return base().extend("content", partial)

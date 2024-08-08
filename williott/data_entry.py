@@ -10,6 +10,8 @@ from williott.pokemon.models import (
     Pokemon,
     Description,
     Generation,
+    Form,
+    FormName,
 )
 
 
@@ -95,6 +97,33 @@ def data_entry() -> None:
                 }
             )
 
+    forms = []
+    with open(f"{folder}/forms.csv") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row = {key: val if val != "" else None for key, val in row.items()}
+            forms.append(
+                {
+                    **row,
+                    "is_default": int(row["is_default"]),
+                    "is_battle_only": int(row["is_battle_only"]),
+                    "is_mega": int(row["is_mega"]),
+                }
+            )
+
+    form_names = []
+    with open(f"{folder}/form_names.csv") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row = {key: val if val != "" else None for key, val in row.items()}
+            form_names.append(
+                {
+                    **row,
+                    "form_id": row["pokemon_form_id"],
+                    "language_id": row["local_language_id"],
+                }
+            )
+
     bind = op.get_bind()
     session = sa.orm.Session(bind=bind)
 
@@ -104,5 +133,7 @@ def data_entry() -> None:
     session.bulk_insert_mappings(Description, descriptions)  # type: ignore
     session.bulk_insert_mappings(Pokemon, all_pokemon)  # type: ignore
     session.bulk_insert_mappings(SpeciesName, species_names)  # type: ignore
+    session.bulk_insert_mappings(Form, forms)  # type: ignore
+    session.bulk_insert_mappings(FormName, form_names)  # type: ignore
 
     session.commit()

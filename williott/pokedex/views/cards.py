@@ -1,23 +1,36 @@
+import json
 import requests
 from fastapi import Depends
 from hypermedia import Button, Div, Image
 from hypermedia.models import ElementList
 
-from williott.pokemon.dependencies import get_species
-from williott.pokemon.models import Species
+from williott.pokemon.dependencies import get_pokemon
+from williott.pokemon.models import Pokemon
 
-CARD_API: str = "https://api.pokemontcg.io/v2/cards?q=nationalPokedexNumbers:"
+CARD_API: str = "https://api.pokemontcg.io/v2/cards?q=nationalPokedexNumbers:{id}{query}&select=id,images"
+# (-name:*alola* OR -name:*test*)
 
 
-def render_cards_partial(
-    species: Species = Depends(get_species),
-):
-    result = requests.get(CARD_API + str(species.id))
+def render_cards_partial(pokemon: Pokemon = Depends(get_pokemon)):
+    query = ""
+    if pokemon.is_default:
+        # get exact match on name.
+        query = f" !name:{pokemon.identifier}"
 
-    images = [
-        {"id": entry["id"], "url": entry["images"]["small"]}
-        for entry in result.json()["data"]
-    ]
+    else:
+        name = pokemon.species.identifier
+
+        form_name = pokemon.identifier.replace(name, "").replace("-", "")
+
+        query = f" name:*{form_name}*"
+
+    result = requests.get(CARD_API.format(id=str(pokemon.species_id), query=query))
+
+    the_json = result.json()
+
+    data = the_json["data"]
+
+    images = [{"id": entry["id"], "url": entry["images"]["small"]} for entry in data]
 
     image_elements = [
         ElementList(
