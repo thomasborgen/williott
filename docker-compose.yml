@@ -1,0 +1,117 @@
+volumes:
+  williott-db-data:
+
+networks:
+  public-traefik:
+    external: true
+  local-adminer:
+    external: true
+  williott:
+
+
+services:
+
+  williott_db:
+    image: postgres:18
+    restart: always
+    networks:
+      - local-adminer
+      - williott
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      start_interval: 1s
+      timeout: 10s
+    volumes:
+      - williott-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+
+  prestart:
+    build:
+      context: .
+    networks:
+      - williott
+    depends_on:
+      williott_db:
+        condition: service_healthy
+        restart: true
+    command: bash /app/scripts/prestart.sh
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DOMAIN=${DOMAIN}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - PROJECT_NAME=${PROJECT_NAME}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - SECRET_KEY=${SECRET_KEY?Variable not set}
+      - POSTGRES_SERVER=${POSTGRES_SERVER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+
+  williott:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        GCP_SERVICE_ACCOUNT_KEY_BASE64: ${GCP_SERVICE_ACCOUNT_KEY_BASE64?Variable not set}
+    restart: always
+    networks:
+      - public-traefik
+      - williott
+    depends_on:
+      williott_db:
+        condition: service_healthy
+        restart: true
+      prestart:
+        condition: service_completed_successfully
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DOMAIN=${DOMAIN?Variable not set}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - PROJECT_NAME=${PROJECT_NAME?Variable not set}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - SECRET_KEY=${SECRET_KEY?Variable not set}
+      - POSTGRES_SERVER=${POSTGRES_SERVER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+
+      - GOOGLE_APPLICATION_CREDENTIALS=key.json
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/ping"]
+      interval: 100s
+      retries: 10
+      start_period: 30s
+      start_interval: 1s
+      timeout: 10s
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=public-traefik
+      - traefik.constraint-label=public-traefik
+
+      - traefik.http.services.${PROJECT_NAME}.loadbalancer.server.port=8000
+
+      - traefik.http.routers.${PROJECT_NAME}-http.rule=Host(`${PROJECT_NAME}.${DOMAIN}`)
+      - traefik.http.routers.${PROJECT_NAME}-http.entrypoints=http
+
+      - traefik.http.routers.${PROJECT_NAME}-https.rule=Host(`${PROJECT_NAME}.${DOMAIN}`)
+      - traefik.http.routers.${PROJECT_NAME}-https.entrypoints=https
+      - traefik.http.routers.${PROJECT_NAME}-https.tls=true
+      - traefik.http.routers.${PROJECT_NAME}-https.tls.certresolver=le
+
+      # Enable redirection for HTTP and HTTPS
+      - traefik.http.routers.${PROJECT_NAME}-http.middlewares=https-redirect

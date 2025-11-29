@@ -11,7 +11,6 @@ from hypermedia import (
 )
 from hypermedia.models import Element, ElementList
 
-from williott.html_utils import icon
 
 
 def real_base() -> Element:

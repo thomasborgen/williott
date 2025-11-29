@@ -5,13 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from hypermedia.fastapi import full, htmx
 from hypermedia.models import Element
 
-
-from williott.pokedex.router import (
-    router as pokedex_router,
-)
-
-from williott.which_one.router import (
-    router as which_one_router,
+from williott.hiragana.router import (
+    router as hiragana_router,
 )
 
 from williott.speak.router import (
@@ -30,8 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(pokedex_router)
-app.include_router(which_one_router)
+app.include_router(hiragana_router)
 app.include_router(speak_router)
 
 app.mount("/static", StaticFiles(directory="williott/static/"), name="static")
@@ -45,14 +39,25 @@ app.mount(
     StaticFiles(directory="williott/pokedex/static/"),
     name="pokedex",
 )
+app.mount(
+    "/hiragana/static",
+    StaticFiles(directory="williott/hiragana/static/"),
+    name="static",
+)
 
 
 @app.get("/", response_class=HTMLResponse)
 @htmx
-async def index(
+def index(
     request: Request,
     partial: Element = Depends(render_index_partial),
     full: Element = Depends(full(render_index)),
 ) -> None:
     """Return the index page."""
     pass
+
+
+@app.get("/ping")
+async def ping() -> str:
+    """Ping the server."""
+    return "pong"

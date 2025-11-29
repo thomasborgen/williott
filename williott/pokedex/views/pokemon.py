@@ -7,7 +7,6 @@ import urllib
 
 from williott.pokedex.views.base import base
 from williott.pokedex.views.common import (
-    render_pokemon_fab_htmx,
     render_species_fab_htmx,
 )
 from williott.pokemon.dependencies import get_evolutions, get_pokemon, get_species
@@ -97,7 +96,7 @@ def render_pokemon_partial(
             src=urllib.parse.quote(
                 f"/speak/english/This pokemon's name is, {english_name.name}"
             ),
-            style="display:none;",
+            style={"display": "none"},
             autoplay=True,
         ),
         Audio(
@@ -106,19 +105,19 @@ def render_pokemon_partial(
                 f"/speak/japanese/このポケモンの名前は, {japanese_name.name}"
             ),
             preload="none",
-            style="display:none;",
+            style={"display": "none"},
         ),
         Audio(
             id="audio_number",
             src=urllib.parse.quote(f"/speak/english/Number, {species.id}"),
             preload="none",
-            style="display:none;",
+            style={"display": "none"},
         ),
         Audio(
             id="audio_description_english",
             src=urllib.parse.quote(f"/speak/english/{description}"),
             preload="none",
-            style="display:none;",
+            style={"display": "none"},
         ),
         classes=["stack vertical spacing_medium"],
     )

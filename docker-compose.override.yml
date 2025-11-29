@@ -1,0 +1,21 @@
+services:
+
+  williott:
+    restart: "no"
+    build:
+      context: .
+    command:
+      - fastapi
+      - run
+      - --reload
+      - "williott/main.py"
+    develop:
+      watch:
+        - path: ./williott
+          action: sync
+          target: /app/williott
+          ignore:
+            - .venv
+        - path: ./pyproject.toml
+          action: rebuild
+

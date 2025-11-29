@@ -1,39 +1,53 @@
-FROM python:3.12
+FROM python:3.14
 
-# set workdir RUN and CMD will be executed from here
-WORKDIR /app
+ARG GCP_SERVICE_ACCOUNT_KEY_BASE64
 
-# Install poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PYTHONUNBUFFERED=1
 
-ENV PATH="${PATH}:/root/.local/bin"
+WORKDIR /app/
 
-# For local dev:
-# ENV GOOGLE_APPLICATION_CREDENTIALS='key.json'
-# COPY ./key.json /app/
+# Install uv
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
+COPY --from=ghcr.io/astral-sh/uv:0.4.15 /uv /bin/uv
 
-# setup poetry to use virtualenv
-RUN poetry config virtualenvs.create true
-RUN poetry config virtualenvs.in-project true
+# Place executables in the environment at the front of the path
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#using-the-environment
+ENV PATH="/app/.venv/bin:$PATH"
 
-# COPY this to make use of some cache thingie
-COPY poetry.lock pyproject.toml /app/
+# Compile bytecode
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#compiling-bytecode
+ENV UV_COMPILE_BYTECODE=1
+
+# uv Cache
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#caching
+ENV UV_LINK_MODE=copy
 
 # Install dependencies
-RUN poetry install --no-root --no-dev --no-interaction
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project
 
+ENV PYTHONPATH=/app
+
+COPY ./scripts /app/scripts
 # Copy alembic migrations and files
 COPY alembic.ini /app/
 COPY ./alembic /app/alembic
 
-COPY ./migration_data /app/migration_data
+COPY ./pyproject.toml ./uv.lock ./alembic.ini /app/
 
-# move williott app into the app folder
+# move server into the app folder
+# COPY ./app /app/app
 COPY ./williott /app/williott
 
-# Upgrade/Make Database
-RUN poetry run alembic upgrade head
+# Add service account key from env var
+RUN echo -n ${GCP_SERVICE_ACCOUNT_KEY_BASE64} | base64 --decode >> /app/key.json
 
+# Sync the project
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync
 
-# This will execute from within /app/ so we can find warp directly
-CMD ["poetry", "run",  "uvicorn", "williott.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["fastapi", "run", "--workers", "2", "williott/main.py"]

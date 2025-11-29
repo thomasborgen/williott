@@ -1,5 +1,5 @@
 from fastapi import Depends
-from hypermedia import Anchor, Button, Div, Header2
+from hypermedia import Anchor, Div, Header2
 from hypermedia.models import Element
 
 from williott.which_one.views.base import base, header

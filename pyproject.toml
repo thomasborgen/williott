@@ -1,25 +1,23 @@
-[tool.poetry]
+[project]
 name = "williott"
 version = "0.1.0"
-description = ""
-authors = ["Thomas Borgen <thomasborgen91@gmail.com>"]
+description = "Add your description here"
 readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.17.2",
+    "fastapi[standard]>=0.122.0",
+    "google-cloud-texttospeech>=2.33.0",
+    "hypermedia>=5.3.4",
+    "psycopg[binary]>=3.2.13",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.12.0",
+    "sqlmodel>=0.0.27",
+    "tenacity>=9.1.2",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = "^0.109.2"
-uvicorn = "^0.27.0.post1"
-google-cloud-texttospeech = "^2.16.1"
-hypermedia = "^4.0.0"
-sqlmodel = "^0.0.19"
-alembic = "^1.13.1"
-pydantic-settings = "^2.3.3"
-
-
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.10.0"
-types-requests = "^2.32.0.20240602"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "mypy>=1.19.0",
+    "ruff>=0.14.7",
+]

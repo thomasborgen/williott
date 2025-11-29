@@ -62,7 +62,7 @@ def render_game_partial(
             src=urllib.parse.quote(
                 f"/speak/english/Which of these pokemon is, {target.identifier}"
             ),
-            style="display:none;",
+            style={"display": "none"},
             autoplay="true",
         ),
         id="game",

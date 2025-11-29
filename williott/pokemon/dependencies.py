@@ -9,11 +9,9 @@ from williott.pokemon.models import (
     GenerationRead,
     Pokemon,
     Species,
-    SpeciesName,
     SpeciesRead,
 )
 
-from sqlalchemy.orm import lazyload
 
 
 def get_generation(
