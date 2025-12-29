@@ -34,7 +34,7 @@ def base() -> Element:
                 Meta(charset="UTF-8"),
                 Meta(
                     name="viewport",
-                    content="width=device-width, initial-scale=1.0",
+                    content="width=device-width, height=device-height, initial-scale=1.0",
                 ),
                 Meta(name="htmx-config", content=json.dumps(htmx_config)),
                 # Link(
