@@ -64,7 +64,7 @@ def base() -> Element:
             body(),
             lang="no-nb",
             data_theme="cupcake",  # type: ignore
-            class_="h-screen",
+            class_="h-screen h-dvh w-screen w-dvw",
         ),
     )
 
