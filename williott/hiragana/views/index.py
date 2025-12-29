@@ -24,8 +24,7 @@ def _row_renderer(characters: list[str]) -> Element:
         Span(
             ", ".join(characters),
         ),
-        # class_="label cursor-pointer",
-        class_="card bg-base-100 w-100 mx-4 shadow-xl flex flex-row items-center justify-start gap-4 label cursor-pointer",
+        class_="label",
     )
 
 
@@ -51,7 +50,7 @@ def render_index_partial() -> Element:
             hx_get="/hiragana/game",
             hx_push_url="true",
             hx_target="#main",
-            class_="flex flex-col gap-2 p-4",
+            class_="flex flex-col gap-4 p-4 items-start justify-center",
         ),
         class_="min-h-full w-full",
     )

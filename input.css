@@ -1,0 +1,8 @@
+@import "tailwindcss" source("./williott");
+
+@source not "./tailwindcss";
+@source not "./daisyui{,*}.mjs";
+
+@plugin "./daisyui.mjs" {
+  themes: cupcake;
+}

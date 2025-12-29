@@ -11,6 +11,12 @@ def render_index_partial():
         Header1("Williott", classes=["text_center"]),
         Div(
             Anchor(
+                Button(icon(name="translate", size="48px"), classes=["fab"]),
+                href="/hiragana",
+            ),
+        ),
+        Div(
+            Anchor(
                 Button(icon(name="search", size="48px"), classes=["fab"]),
                 href="/pokedex",
             ),

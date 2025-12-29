@@ -37,10 +37,14 @@ def base() -> Element:
                     content="width=device-width, initial-scale=1.0",
                 ),
                 Meta(name="htmx-config", content=json.dumps(htmx_config)),
+                # Link(
+                #     href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css",
+                #     rel="stylesheet",
+                #     type="text/css",
+                # ),
                 Link(
-                    href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css",
                     rel="stylesheet",
-                    type="text/css",
+                    href="/static/css/williott.css",
                 ),
                 Link(
                     rel="stylesheet",
@@ -50,7 +54,7 @@ def base() -> Element:
                     rel="stylesheet",
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0",
                 ),
-                Script(src="https://cdn.tailwindcss.com"),
+                # Script(src="https://cdn.tailwindcss.com"),
                 Script(src="/static/javascript/htmx.min.js"),
                 Script(src="/static/javascript/audio_event_attacher.js"),
                 Script(src="https://unpkg.com/hyperscript.org@0.9.12"),
