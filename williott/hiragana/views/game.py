@@ -37,9 +37,9 @@ def _choice_renderer(hiragana: Hiragana, correct: bool = False) -> Element:
         audio and audio or "",
         id=hiragana.romaji,
         class_="card bg-base-100 shadow-xl grid grid-rows-2",
-        _=f"on click transition my background-color to {'"green"' if correct else '"red"'}",
+        _=f"on click transition my background-color to {'"green"' if correct else '"red"'} over 200ms",
         hx_get="" if correct else None,
-        hx_trigger="click delay:2s" if correct else None,
+        hx_trigger="click delay:1s" if correct else None,
         hx_target="#main",
     )
 
