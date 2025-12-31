@@ -45,14 +45,14 @@ def render_index_partial() -> Element:
             Input(
                 type="submit",
                 value="Start",
-                class_="btn btn-primary w-100 absolute bottom-4 right-4 left-4",
+                class_="btn btn-primary btn-block absolute bottom-4 right-4 left-4",
             ),
             hx_get="/hiragana/game",
             hx_push_url="true",
             hx_target="#main",
             class_="flex flex-col gap-4 p-4 items-start justify-center",
         ),
-        class_="min-h-full w-full",
+        class_="h-full w-full",
     )
 
 
